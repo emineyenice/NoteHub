@@ -8,3 +8,6 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 
 Add-Migration Initial
 Update-database
+
+https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0
+
