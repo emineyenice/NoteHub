@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NoteHub.API.Controllers
 {
+    [Authorize]
     //[Authorize(Roles = Constants.Roles.ADMIN)]
     [ApiController]
     [Route("[controller]")]
