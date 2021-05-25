@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NoteHub.API.Data;
+using NoteHub.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,48 @@ namespace NoteHub.API.Controllers
                 return CreatedAtAction("GetNote", new { Id = note.Id }, note);
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutNote(int id, PutNoteModel model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var note = await _db.Notes.FirstOrDefaultAsync(x => x.ApplicationUserId == UserId && x.Id == id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            note.Title = model.Title;
+            note.Content = model.Content;
+            note.ModifiedTime = DateTime.Now;
+            _db.Update(note);
+            await _db.SaveChangesAsync();
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteNote(int id)
+        {
+            var note = await _db.Notes.FirstOrDefaultAsync(x => x.ApplicationUserId == UserId && x.Id == id);
+            if (note == null)
+            {
+                return NotFound();
+            }
+            _db.Remove(note);
+            await _db.SaveChangesAsync();
+            return NoContent();
+
         }
     }
 }
