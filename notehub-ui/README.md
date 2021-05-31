@@ -74,5 +74,8 @@ https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snipp
 
 https://reactrouter.com/web/guides/quick-start
 
+https://www.npmjs.com/package/react-toastify
+
+
 
 rfce => React function component with export
