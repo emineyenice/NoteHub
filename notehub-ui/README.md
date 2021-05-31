@@ -72,4 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### links
 https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets
 
+https://reactrouter.com/web/guides/quick-start
+
+
 rfce => React function component with export

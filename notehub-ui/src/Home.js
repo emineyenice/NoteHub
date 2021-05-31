@@ -1,6 +1,8 @@
 import './Home.css';
 import React from 'react';
+import {Link} from 'react-router-dom'
 import { Col, Container, Row, Navbar, Nav, NavDropdown, ListGroup, Form, Button } from 'react-bootstrap';
+
 
 function Home() {
     return (
@@ -14,7 +16,7 @@ function Home() {
                     </Nav>
                     <Nav>
                         <NavDropdown alignRight title="My Account" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Logout (admin@example.com)</NavDropdown.Item>
+                            <Link className="dropdown-item" to="/logout">Logout (admin@example.com)</Link>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
