@@ -20,30 +20,26 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(true);
+    const [errors, setErrors] = useState([]);
 
     const handleSubmit = function (e) {
         e.preventDefault();
-        axios.get("https://localhost:44331/api/Account/Login", {
+        axios.post("https://localhost:5001/api/Account/Login", {
             username: email,
             password: password
         }).then(function
             (response) {
             console.log(response);
         }).catch(function (error) {
-            const data = error.response.data;
-            const messages = [];
-            for (const key in error.response.data) {
-                messages.push(...data[key]);
+            if (error.response.data && error.response.data.errors) {
+                const messages = [];
+                for (const key in error.response.data.errors) {
+                    messages.push(...error.response.data.errors[key]);
+                }
+                setErrors(messages);
             }
-            console.log(messages.join(''));
+
         });
-
-
-
-        //todo:apiye istekte bulun
-        //hata gelirse hata mesajı göster
-        //token gelirse kaydet kogin et ve home'a yönlendir
-
     };
 
     return (
