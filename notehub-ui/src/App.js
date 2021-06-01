@@ -14,10 +14,10 @@ import Login from './Login'
 import Logout from './Logout'
 
 function App() {
-  let isLoggedIn = true;
-  const [token, setToken] = useState("qwerty");
+  const [isLoggedIn, setIsLoggedIn] = useState(true); //isLoggedIn=true; react'e haber vermez.
+  const [token, setToken] = useState(null);
   return (
-    <AppContext.Provider value={{ token, setToken }}>
+    <AppContext.Provider value={{ token, setToken, isLoggedIn, setIsLoggedIn }}>
       <Router>
         <Switch>
           <Route path="/register">
@@ -30,7 +30,7 @@ function App() {
             <Logout />
           </Route>
           <Route path="/">
-            {isLoggedIn ? <Home /> : <div> önce giriş yap </div>}
+            {isLoggedIn ? <Home /> : <Login />}
           </Route>
         </Switch>
       </Router>

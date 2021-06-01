@@ -1,9 +1,15 @@
-import React from 'react'
-import { Redirect } from 'react-router'
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AppContext from './AppContext';
 
-// tofo: token'ı sil
+
 function Logout() {
-    return <Redirect to="/login?logout=success"/>;
+    const ctx = useContext(AppContext);
+    ctx.setIsLoggedIn(false);
+    ctx.setToken(null);
+    
+    //todo : loalStorage'den token ısil
+    return <Redirect to="/login?logout=success" />;
 }
 
 export default Logout
