@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Login() {
     var query = new URLSearchParams(useLocation().search);
@@ -20,12 +21,25 @@ function Login() {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(true);
 
-    const handleSubmit=function(e){
+    const handleSubmit = function (e) {
         e.preventDefault();
-        console.log("gönderilecek veriler");
-        console.log(email);
-        console.log(password);
-        console.log(rememberMe);
+        axios.get("https://localhost:44331/api/Account/Login", {
+            username: email,
+            password: password
+        }).then(function
+            (response) {
+            console.log(response);
+        }).catch(function (error) {
+            const data = error.response.data;
+            const messages = [];
+            for (const key in error.response.data) {
+                messages.push(...data[key]);
+            }
+            console.log(messages.join(''));
+        });
+
+
+
         //todo:apiye istekte bulun
         //hata gelirse hata mesajı göster
         //token gelirse kaydet kogin et ve home'a yönlendir
@@ -39,7 +53,7 @@ function Login() {
                 <h1 className="text-center">Login</h1>
                 {/* {email} {password} {rememberMe ? "remember" : "don't remember"} */}
                 <Alert variant="danger">
-                    Invalid email or password.
+                    ---
                     </Alert>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
