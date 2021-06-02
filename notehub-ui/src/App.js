@@ -15,10 +15,13 @@ import Logout from './Logout'
 
 function App() {
   // todo: local/session storage da token varsa login et.. 
-  const [isLoggedIn, setIsLoggedIn] = useState(true); //isLoggedIn=true; react'e haber vermez.
-  const [token, setToken] = useState(null);
+  const tokenString = sessionStorage["token"] || localStorage["token"] || null;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(tokenString != null); //isLoggedIn=true; react'e haber vermez.
+  const [token, setToken] = useState(tokenString);
+  const [username, setUsername] = useState(sessionStorage["username"] || localStorage["username"] || null);
   return (
-    <AppContext.Provider value={{ token, setToken, isLoggedIn, setIsLoggedIn }}>
+    <AppContext.Provider value={{ token, setToken, isLoggedIn, setIsLoggedIn, username, setUsername }}>
       <Router>
         <Switch>
           <Route path="/register">

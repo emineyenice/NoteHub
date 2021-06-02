@@ -11,10 +11,9 @@ html, body, #root{
 .card-register{
     margin: 2rem;
     min-width: calc(100% -2rem);
-
 }
 
-@media screen and (min-width:576){
+@media screen and (min-width:576px){
     .card-register{
         min-width: 400px;
     }

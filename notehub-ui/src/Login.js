@@ -15,7 +15,7 @@ function Login() {
 
     useEffect(() => {
         //parametre olarak verilen metot login bileşeni sayfada render olunca çalışır.
-        if (qlogout == "success") {
+        if (qlogout === "success") {
             toast("You have logged out succesfully!");
         }
     }, [qlogout]); //[qlogout] aldığımız parametreye göre çalışıyor.Yani bu parametre değiştikçe çalışşsın.
@@ -27,7 +27,8 @@ function Login() {
 
     const handleSubmit = function (e) {
         e.preventDefault();
-        axios.post("https://localhost:5001/api/Account/Login", {
+        // console.log(process.env.REACT_APP_API_ROOT);
+        axios.post(process.env.REACT_APP_API_ROOT + "/api/Account/Login", {
             username: email,
             password: password
         }).then(function
@@ -44,10 +45,16 @@ function Login() {
                 localStorage.removeItem("username");
                 localStorage.removeItem("token");
             }
+            ctx.setUsername(email);
+            
             ctx.setToken(response.data.token);
             ctx.setIsLoggedIn(true);
             history.push("/");
         }).catch(function (error) {
+            if (!error.response) {
+                setErrors(["Cannot connect to the server. Please try again later."]);
+                return;
+            }
             if (error.response.data && error.response.data.errors) {
                 const messages = [];
                 for (const key in error.response.data.errors) {
@@ -65,8 +72,8 @@ function Login() {
                 <ToastContainer />
                 <h1 className="text-center">Login</h1>
                 {/* {email} {password} {rememberMe ? "remember" : "don't remember"} */}
-                <Alert variant="danger" className={ errors.length == 0 ? "d-none" : "" }>
-                    { errors.join(' ') }
+                <Alert variant="danger" className={errors.length === 0 ? "d-none" : ""}>
+                    {errors.join(' ')}
                 </Alert>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
