@@ -23,7 +23,7 @@ function App() {
   const [username, setUsername] = useState(sessionStorage["username"] || localStorage["username"] || null);
   return (
     <AppContext.Provider value={{ token, setToken, isLoggedIn, setIsLoggedIn, username, setUsername }}>
-      <Router>
+      <Router basename="/NoteHub">
         <Switch>
           <Route path="/register">
             <Register />

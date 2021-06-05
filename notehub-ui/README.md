@@ -78,7 +78,18 @@ https://www.npmjs.com/package/react-toastify
 
 https://github.com/axios/axios
 
+https://stackoverflow.com/questions/60640131/how-to-remove-webdav-in-startup-cs-asp-net-core
 
+### IIS PUT, DELETE CORS PROBLEM SOLUTION:
+
+```xml
+<system.webServer>
+    <modules runAllManagedModulesForAllRequests="false">
+        <remove name="WebDAVModule" />
+    </modules>
+    ...
+</system.webServer>
+```
 
 
 rfce => React function component with export
