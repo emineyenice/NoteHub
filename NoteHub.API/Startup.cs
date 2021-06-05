@@ -61,7 +61,7 @@ namespace NoteHub.API
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins().AllowAnyHeader().AllowAnyMethod();
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
 
